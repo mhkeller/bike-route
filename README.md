@@ -11,7 +11,7 @@ Double-click `index.html` to open it in your browser.
 
 ## Preparing GoeJson files
 
-Often, bike route files are in KML format. Uploda the file(s) <geojson.io> which will convert them to GoeJson. Sometimes routes require multiple KML files but no fear (!), <geojson.io> will append features to your existing collection. Save the file and you're all set.
+Often, bike route files are in KML format. Uploda the file(s) [geojson.io](https://geojson.io) which will convert them to GoeJson. Sometimes routes require multiple KML files but no fear (!), [geojson.io](https://geojson.io) will append features to your existing collection. Save the file and you're all set.
 
 ## Dev
 
