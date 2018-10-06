@@ -1,0 +1,16 @@
+{
+  "name": "bike-route",
+  "version": "1.0.0",
+  "description": "Simple map showing a route line",
+  "main": "route.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" "live-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.0"
+  }
+}

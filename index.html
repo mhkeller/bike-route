@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset='utf-8' />
+		<title>Bike route</title>
+		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+		<script src='helpers/bbox.js'></script>
+		<script src='route.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+		<style>
+				body { margin:0; padding:0; font-family: Helvetica; }
+				#map { position:absolute; top:0; bottom:0; width:100%; }
+		</style>
+</head>
+<body>
+	<div id='map'></div>
+<script>
+window.mapboxgl.accessToken = 'pk.eyJ1Ijoibnl0Z3JhcGhpY3MiLCJhIjoiY2o5YTlyb3ptMTB5bDMybXF2ODRjdThlYyJ9.cytRa2y0Qt3Nedj4eUX67w';
+
+const map = new window.mapboxgl.Map({
+	container: 'map',
+	style: 'mapbox://styles/mapbox/navigation-guidance-day-v4',
+	center: [-73.95, 41.4],
+	zoom: 10
+});
+
+
+const bbox = window.getBbox(geojson);
+
+// Add geolocate control to the map.
+map.addControl(new window.mapboxgl.GeolocateControl({
+	positionOptions: {
+		enableHighAccuracy: true
+	},
+	trackUserLocation: true
+}));
+
+map.on('load', function () {
+	map.addLayer({
+		id: 'line',
+		type: 'line',
+		source: {
+			type: 'geojson',
+			data: geojson
+		},
+		paint: {
+			'line-color': '#ff00cc',
+			'line-width': 5,
+			'line-opacity': 0.7,
+		}
+	});
+	map.fitBounds(bbox, {
+		padding: 20
+	})
+});
+</script>
+
+</body>
+</html>
