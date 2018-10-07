@@ -7,6 +7,7 @@
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
 		<script src='helpers/bbox.js'></script>
 		<script src='route.js'></script>
+		<script src='points.js'></script>
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
 		<style>
 				body { margin:0; padding:0; font-family: Helvetica; }
@@ -21,15 +22,14 @@ window.mapboxgl.accessToken = 'pk.eyJ1Ijoibnl0Z3JhcGhpY3MiLCJhIjoiY2o5YTlyb3ptMT
 const map = new window.mapboxgl.Map({
 	container: 'map',
 	style: 'mapbox://styles/mapbox/navigation-guidance-day-v4',
-	center: [-73.95, 41.4],
+	center: [-73.51352, 41.61167],
 	zoom: 10
 });
-
 
 const bbox = window.getBbox(geojson);
 
 // Add geolocate control to the map.
-map.addControl(new window.mapboxgl.GeolocateControl({
+map.addControl(new mapboxgl.GeolocateControl({
 	positionOptions: {
 		enableHighAccuracy: true
 	},
@@ -42,17 +42,33 @@ map.on('load', function () {
 		type: 'line',
 		source: {
 			type: 'geojson',
-			data: geojson
+			data: window.geojson
 		},
 		paint: {
 			'line-color': '#ff00cc',
 			'line-width': 5,
-			'line-opacity': 0.7,
+			'line-opacity': 0.7
 		}
 	});
+	map.addLayer({
+		id: 'points',
+		type: 'circle',
+		source: {
+			type: 'geojson',
+			data: window.points
+		},
+		paint: {
+			'circle-color': '#00ccff',
+			'circle-radius': 10,
+			'circle-opacity': 0.7
+		}
+	});
+
+	map.setLayoutProperty('points', 'text-field', 'name');
+
 	map.fitBounds(bbox, {
 		padding: 20
-	})
+	});
 });
 </script>
 
